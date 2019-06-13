@@ -22,8 +22,8 @@ public class RedisUtils {
             synchronized (RedisUtils.class) {
                 if(jedisPool == null) {
                     GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-                    poolConfig.setMaxTotal(10);
-                    poolConfig.setMaxIdle(10);
+                    poolConfig.setMaxTotal(8);
+                    poolConfig.setMaxIdle(8);
                     poolConfig.setMinIdle(0);
                     poolConfig.setMaxWaitMillis(6000);
                     poolConfig.setTestOnBorrow(true);

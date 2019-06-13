@@ -28,4 +28,38 @@ public class RedisDemo2ApplicationTests {
 		}
 	}
 
+	@Test
+	public void hsetTest() {
+		Jedis jedis = null;
+		try {
+			JedisPool jedisPool = RedisUtils.getJedisPool();
+			jedis = jedisPool.getResource();
+			jedis.hset("user", "id", "20");
+			jedis.hset("user", "name", "李四");
+			String uid = jedis.hget("user", "id");
+			String uname = jedis.hget("user", "name");
+			System.out.println(uid);
+			System.out.println(uname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			RedisUtils.release(jedis);
+		}
+	}
+
+	@Test
+	public void lpushTest() {
+		Jedis jedis = null;
+		try {
+			JedisPool jedisPool = RedisUtils.getJedisPool();
+			jedis = jedisPool.getResource();
+			jedis.lpush("list01", "1", "2", "3", "4", "5", "6");
+			String list01 = jedis.lpop("list01");
+			System.out.println(list01);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			RedisUtils.release(jedis);
+		}
+	}
 }

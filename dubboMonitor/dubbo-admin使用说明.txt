@@ -1,0 +1,4 @@
+1. 修改application.properties文件dubbo.registry.address地址（端口号默认为7001，可修改）；
+2. 打包生成dubbo-admin-0.0.1-SNAPSHOT.jar
+3. 执行文件，java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
+4. 访问监控中心，localhost:7001，用户名密码都是root

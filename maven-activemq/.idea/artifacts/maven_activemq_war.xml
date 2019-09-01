@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="maven-activemq:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="maven-activemq-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="maven-activemq:war exploded" />
+    </root>
+  </artifact>
+</component>

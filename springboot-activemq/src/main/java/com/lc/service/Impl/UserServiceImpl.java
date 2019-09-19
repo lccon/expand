@@ -22,19 +22,35 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JmsSender JmsSender;
 
-    public User addUser() {
-        User user = new User();
-        user.setName("李四");
-        user.setAge(15);
+    public User addUser(User user) {
         userMapper.addUser(user);
 
         MsgContent msgContent = new MsgContent();
         msgContent.setMsgId(user.getId());
         JmsSender.sendMessage(msgContent);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return user;
     }
 
     public User getUserById(Long id) {
         return userMapper.getUserById(id);
     }
+
+    @Override
+    public User UpdateUser() {
+        userMapper.updateUser(new User(11L, 200));
+        userMapper.updateUser(new User(12L, 1000));
+        return getUserById(11L);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return userMapper.getUserByName(name);
+    }
+
+
 }

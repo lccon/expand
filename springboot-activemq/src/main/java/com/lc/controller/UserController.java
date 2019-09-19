@@ -22,8 +22,14 @@ public class UserController {
 
     @RequestMapping("addUserQueue")
     @ResponseBody
-    public User addUserQueue() {
-        return userService.addUser();
+    public User addUserQueue(User user) {
+        return userService.addUser(user);
+    }
+
+    @RequestMapping("updateUser")
+    @ResponseBody
+    public User updateUser() {
+        return userService.UpdateUser();
     }
 
 }

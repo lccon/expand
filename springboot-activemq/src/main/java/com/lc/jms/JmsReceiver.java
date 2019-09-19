@@ -24,8 +24,10 @@ public class JmsReceiver {
     @JmsListener(destination = "baseQueue02")
     public void receivedUserMessage(String jmsMessage) {
         MsgContent msgContent = JSON.parseObject(jmsMessage, MsgContent.class);
-        User user = userService.getUserById(msgContent.getMsgId());
-        System.out.println("消费者1已消费:"+JSON.toJSONString(user));
+        // User user = userService.getUserById(msgContent.getMsgId());
+        User user = userService.getUserByName("AA");
+
+        System.out.println("消费者已消费:"+JSON.toJSONString(user));
     }
 
 }

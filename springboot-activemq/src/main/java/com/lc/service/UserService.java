@@ -10,7 +10,19 @@ import com.lc.domain.User;
  */
 public interface UserService {
 
-    User addUser();
+    /**
+     * 存在事务的前提下新增数据并发送mq
+     * @return
+     */
+    User addUser(User user);
+
+    /**
+     * 验证是否存在事务
+     * @return
+     */
+    User UpdateUser();
 
     User getUserById(Long id);
+
+    User getUserByName(String name);
 }

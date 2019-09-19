@@ -3,16 +3,53 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lc.mapper.UserMapper">
 
+    <resultMap id="userResultMap" type="com.lc.domain.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="wages" column="wages"/>
+        <result property="sex" column="sex"/>
+    </resultMap>
+
+    <sql id="columns">
+        id, name, age, wages, sex
+    </sql>
+
     <insert id="addUser" parameterType="com.lc.domain.User">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO user(id, name, age)
-        VALUES (#{id}, #{name}, #{age})
+        INSERT INTO user(id, name, age, wages, sex)
+        VALUES (#{id}, #{name}, #{age}, #{wages}, #{sex})
     </insert>
 
-    <select id="getUserById" parameterType="java.lang.Long" resultType="com.lc.domain.User">
-        SELECT * FROM user WHERE id = #{value}
+    <select id="getUserById" parameterType="java.lang.Long" resultMap="userResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM user WHERE id = #{value}
+    </select>
+
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="wages != null">
+                wages = #{wages}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findUserForList" resultMap="userResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM user
+    </select>
+
+    <select id="getUserByName" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM USER
+        WHERE NAME = #{value}
     </select>
 
 </mapper>
